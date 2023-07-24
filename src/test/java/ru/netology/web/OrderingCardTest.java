@@ -74,6 +74,16 @@ class OrderingCardTest {
 
     }
     @Test
+    public void shouldTestPhoneNoPlus() {
+        open("http://localhost:9999");
+        $("[data-test-id =name] input").setValue("Иванов Иван");
+        $( "[data-test-id =phone] input").setValue("79300000000");
+        $( "[data-test-id =agreement]").click();
+        $(".button").click();
+        $("[data-test-id =phone].input_invalid .input__sub").shouldHave(exactText("Телефон указан неверно. Должно быть 11 цифр, например, +79012345678."));
+
+    }
+    @Test
     public void shouldTestNoPhone() {
         open("http://localhost:9999");
         $("[data-test-id =name] input").setValue("Иванов Иван");
